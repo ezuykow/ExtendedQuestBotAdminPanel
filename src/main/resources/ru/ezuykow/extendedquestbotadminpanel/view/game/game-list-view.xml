@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://gameListView.title"
+      focusComponent="gamesDataGrid">
+    <data readOnly="true">
+        <collection id="gamesDc"
+                    class="ru.ezuykow.extendedquestbotadminpanel.entity.Game">
+            <fetchPlan extends="_base">
+                <property name="author" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="gamesDl">
+                <query>
+                    <![CDATA[select e from Game e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="gamesDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="gamesDataGrid.create"/>
+            <button id="editBtn" action="gamesDataGrid.edit"/>
+            <button id="removeBtn" action="gamesDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="gamesDl"/>
+        </hbox>
+        <dataGrid id="gamesDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="gamesDc">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="author"/>
+                <column property="name"/>
+                <column property="duration_mins"/>
+                <column property="question_count"/>
+                <column property="active_question_count"/>
+                <column property="max_hints_per_question"/>
+                <column property="additionals_with_question"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

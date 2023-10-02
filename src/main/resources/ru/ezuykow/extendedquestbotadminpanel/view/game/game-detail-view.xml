@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://gameDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="gameDc"
+                  class="ru.ezuykow.extendedquestbotadminpanel.entity.Game">
+            <fetchPlan extends="_base">
+                <property name="author" fetchPlan="_base"/>
+                <property name="question_groups" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="question_groupsDc" property="question_groups"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="gameDc">
+            <entityPicker id="authorField" property="author">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="nameField" property="name"/>
+            <textField id="duration_minsField" property="duration_mins"/>
+            <textField id="question_countField" property="question_count"/>
+            <textField id="active_question_countField" property="active_question_count"/>
+            <textField id="max_hints_per_questionField" property="max_hints_per_question"/>
+            <checkbox id="additionals_with_questionField" property="additionals_with_question"/>
+        </formLayout>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button action="question_groupsDataGrid.add"/>
+            <button action="question_groupsDataGrid.exclude"/>
+        </hbox>
+        <dataGrid id="question_groupsDataGrid" dataContainer="question_groupsDc" width="100%" height="100%">
+            <actions>
+                <action id="add" type="list_add"/>
+                <action id="exclude" type="list_exclude"/>
+            </actions>
+            <columns>
+                <column property="groupName"/>
+                <column property="version"/>
+            </columns>
+        </dataGrid>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

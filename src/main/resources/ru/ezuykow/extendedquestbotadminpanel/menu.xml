@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/flowui/menu">
+
+    <item view="User.list" title="msg://ru.ezuykow.extendedquestbotadminpanel.view.user/UserListView.title"/>
+    <item view="Game.list" title="msg://ru.ezuykow.extendedquestbotadminpanel.view.game/gameListView.title"/>
+    <item view="Question.list"
+          title="msg://ru.ezuykow.extendedquestbotadminpanel.view.question/questionListView.title"/>
+    <item view="QuestionGroup.list"
+          title="msg://ru.ezuykow.extendedquestbotadminpanel.view.questiongroup/questionGroupListView.title"/>
+    <item view="Hint.list" title="msg://ru.ezuykow.extendedquestbotadminpanel.view.hint/hintListView.title"/>
+
+
+</menu-config>
